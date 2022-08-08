@@ -1,6 +1,6 @@
 import Header from "./Components/Header";
 import Navbar from "./Components/Navbar";
 import MyOrders from "./Components/MyOrders";
-import Products from "./Components/Products";
+import Store from "./Components/Store";
 
-export { Header, Navbar, MyOrders, Products };
+export { Header, Navbar, MyOrders, Store };
