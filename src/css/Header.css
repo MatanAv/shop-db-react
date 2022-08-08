@@ -1,0 +1,12 @@
+header {
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: darkslategray;
+  color: #fff;
+}
+
+h1 {
+  text-align: center;
+}
