@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import { showLoading } from "../services/utils";
 
-const Product = () => {
+const Product = ({ props }) => {
   const [product, setProduct] = useState({});
+
+  useEffect(() => {
+    setProduct(props);
+  }, [props]);
 
   const showProduct = () => {
     return (

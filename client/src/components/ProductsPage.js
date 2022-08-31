@@ -8,8 +8,13 @@ const ProductsPage = () => {
   const [orderItems, setOrderItems] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
 
+  {
+    console.log("here");
+  }
+
   const getProducts = async () => {
     const response = await fetchAllProducts();
+
     setProductsList(response.data);
   };
 
@@ -24,34 +29,39 @@ const ProductsPage = () => {
     getProducts();
   }, []);
 
-  useEffect(() => {
-    initOrderItems();
-  }, [productsList]);
+  // useEffect(() => {
+  //   initOrderItems();
+  // }, [productsList]);
 
   const showProducts = () => {
     return (
       <div className='products-list'>
         <ul>
-          {productsList.map((product) => {
+          {productsList.map((product) => (
+            <Product key={product.id} props={product} />
+          ))}
+
+          {/* {productsList.map((product) => {
+            console.log(product);
             return (
               <li>
-                <Product key={product.id} />
+                <Product key={product.id} props={product} />
                 <input
                   type='number'
                   min='-9'
                   max='9'
-                  onChange={(e) => {
-                    setOrderItems((prev) => {
-                      return { ...prev, [product.id]: e.target.value };
-                    });
-                    setTotalPrice(
-                      (prev) => prev + product.price * Number(e.target.value)
-                    );
-                  }}
+                  // onChange={(e) => {
+                  //   setOrderItems((prev) => {
+                  //     return { ...prev, [product.id]: e.target.value };
+                  //   });
+                  //   setTotalPrice(
+                  //     (prev) => prev + product.price * Number(e.target.value)
+                  //   );
+                  // }}
                 ></input>
               </li>
             );
-          })}
+          })} */}
         </ul>
       </div>
     );
