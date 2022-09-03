@@ -1,8 +1,19 @@
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
-import UserPage from "../components/UserPage";
-import AdminPage from "../components/AdminPage";
 import ProductsPage from "../components/ProductsPage";
 import Product from "../components/Product";
+import ReciptsPage from "../components/ReciptsPage";
+import Recipt from "../components/Recipt";
+import ReciptView from "../components/ReciptView";
+import Item from "../components/Item";
 
-export { Header, Navbar, UserPage, AdminPage, ProductsPage, Product };
+export {
+  Header,
+  Navbar,
+  ProductsPage,
+  Product,
+  ReciptsPage,
+  Recipt,
+  ReciptView,
+  Item,
+};

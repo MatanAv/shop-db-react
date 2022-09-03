@@ -24,7 +24,7 @@ const createOrder = async (order) => {
 
   const createdOrder = { orderId, ...order };
 
-  return { success: createdOrder };
+  return createdOrder;
 };
 
 const getReciptById = async (id, type) => {
@@ -33,14 +33,14 @@ const getReciptById = async (id, type) => {
   if (type === "order") {
     recipts = await runSQL(
       `select 
-          JSON_OBJECT('orderId' is ORDER_ID, 'orderDate' is ORDER_DATE,
+          JSON_OBJECT('id' is ORDER_ID, 'orderDate' is ORDER_DATE,
           'customerId' is CUSTOMER_ID, 'isActive' is IS_ACTIVE)
           FROM headerorders WHERE order_id = ${id}`
     );
   } else if (type === "invoice") {
     recipts = await runSQL(
       `select 
-          JSON_OBJECT('invoiceId' is INVOICE_ID , 'orderId' is ORDER_ID,
+          JSON_OBJECT('id' is INVOICE_ID , 'orderId' is ORDER_ID,
           'orderDate' is ORDER_DATE, 'customerId' is CUSTOMER_ID)
           FROM headerinvoices WHERE invoice_id = ${id}`
     );
@@ -58,13 +58,13 @@ const getAllRecipts = async (type) => {
 
   if (type === "order") {
     recipts = await runSQL(
-      `select JSON_OBJECT('orderId' is ORDER_ID, 'orderDate' is ORDER_DATE, 'customerId' is CUSTOMER_ID)
+      `select JSON_OBJECT('id' is ORDER_ID, 'orderDate' is ORDER_DATE, 'customerId' is CUSTOMER_ID)
         FROM headerorders`
     );
   } else if (type === "invoice") {
     recipts = await runSQL(
       `select 
-        JSON_OBJECT('invoiceId' is INVOICE_ID , 'orderId' is ORDER_ID,
+        JSON_OBJECT('id' is INVOICE_ID , 'orderId' is ORDER_ID,
         'orderDate' is ORDER_DATE, 'customerId' is CUSTOMER_ID)
         FROM headerinvoices`
     );
@@ -79,7 +79,7 @@ const getAllRecipts = async (type) => {
 
 const getAllActiveOrders = async () => {
   let orders = await runSQL(
-    `select JSON_OBJECT('orderId' is ORDER_ID, 'orderDate' is ORDER_DATE, 'customerId' is CUSTOMER_ID)
+    `select JSON_OBJECT('id' is ORDER_ID, 'orderDate' is ORDER_DATE, 'customerId' is CUSTOMER_ID)
     FROM headerorders WHERE is_active = 1`
   );
 
@@ -97,7 +97,7 @@ const getViewById = async (id, type) => {
   let reciptsHeader, reciptsLines;
 
   reciptsHeader = await runSQL(
-    `select JSON_OBJECT('${viewType}Id' is ${viewType}_ID, '${viewType}Date' is ${viewType}_DATE,
+    `select JSON_OBJECT('id' is ${viewType}_ID, 'orderDate' is ORDER_DATE,
     'firstName' is FIRST_NAME, 'lastName' is LAST_NAME)
     FROM ${viewType}_header_details WHERE ${viewType}_id = :id`,
     [id]
@@ -119,24 +119,25 @@ const getViewById = async (id, type) => {
   return reciptView;
 };
 
+const setOrderDone = async (id) => {
+  const isActive = await runSQL(
+    `select is_active from headerorders
+  where order_id = :id;`,
+    [id]
+  );
+
+  if (!isActive) return { success: false };
+
+  const response = await runSQL(`BEGIN SETORDERDONE(:o_id); END;`, [id]);
+
+  return response;
+};
+
 module.exports = {
   getAllRecipts,
   getReciptById,
   getAllActiveOrders,
   getViewById,
   createOrder,
+  setOrderDone,
 };
-
-// {
-//     customerId = 1;
-//     itemsIds = [
-//         {
-//             productId: 1,
-//             quantity: 6,
-//         },
-//         {
-//             productId: 2,
-//             quantity: 4,
-//         },
-//     ];
-// }

@@ -7,10 +7,16 @@ const Navbar = () => {
       <div className='nav-container'>
         <ul>
           <li>
-            <Link to='/'>User Page</Link>
+            <Link to='/products'>Products</Link>
           </li>
           <li>
-            <Link to='/admin'>Admin Page</Link>
+            <Link to='/recipts/actives'>Active Orders</Link>
+          </li>
+          <li>
+            <Link to='/recipts/history'>Orders History</Link>
+          </li>
+          <li>
+            <Link to='/details'>Queries</Link>
           </li>
         </ul>
       </div>

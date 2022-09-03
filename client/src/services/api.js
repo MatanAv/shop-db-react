@@ -1,8 +1,16 @@
 import axios from "axios";
+axios.defaults.baseURL = `http://localhost:5000/`;
 
 const fetchAllProducts = () => {
   return axios
     .get(`api/products`)
+    .then((res) => res.data)
+    .catch(alert);
+};
+
+const fetchAllCustomers = () => {
+  return axios
+    .get(`api/customers`)
     .then((res) => res.data)
     .catch(alert);
 };
@@ -37,13 +45,14 @@ const getPrintedRecipt = (id, type) => {
 
 const createNewOrder = (order) => {
   return axios
-    .get(`api/recipts/post/order`, order)
+    .post(`api/recipts/order/post`, order)
     .then((res) => res.data)
     .catch(alert);
 };
 
 export {
   fetchAllProducts,
+  fetchAllCustomers,
   fetchAllRecipts,
   getReciptDetails,
   getAllActiveOrders,

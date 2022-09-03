@@ -5,11 +5,19 @@ const {
   getAllActiveOrders,
   getViewById,
   createOrder,
+  setOrderDone,
 } = require("../storage/recipts");
 
 const router = express.Router();
 
-router.post("/post/order", async (req, res) => {
+router.put("/order/complete/:id", async (req, res) => {
+  const id = req.params.id;
+  const response = await setOrderDone(id);
+
+  res.json({ data: response });
+});
+
+router.post("/order/post", async (req, res) => {
   const order = req.body;
   const createdOrder = await createOrder(order);
 
