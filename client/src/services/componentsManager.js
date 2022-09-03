@@ -6,6 +6,7 @@ import ReciptsPage from "../components/ReciptsPage";
 import Recipt from "../components/Recipt";
 import ReciptView from "../components/ReciptView";
 import Item from "../components/Item";
+import Inventory from "../components/Inventory";
 
 export {
   Header,
@@ -16,4 +17,5 @@ export {
   Recipt,
   ReciptView,
   Item,
+  Inventory,
 };

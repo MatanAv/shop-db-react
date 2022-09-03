@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import { getPrintedRecipt } from "../services/api";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { getPrintedRecipt, setOrderDone } from "../services/api";
 import { reciptsTypes } from "../services/configurations";
 import { showLoading } from "../services/utils";
 import Item from "./Item";
 
 const ReciptView = () => {
   const [reciptDetails, setReciptDetails] = useState({});
+  let navigate = useNavigate();
   let location = useLocation();
   let { id } = useParams();
 
@@ -23,6 +24,10 @@ const ReciptView = () => {
   useEffect(() => {
     getRecipt();
   }, []);
+
+  const setOrderCompleted = async () => {
+    await setOrderDone(reciptDetails.id);
+  };
 
   const showReciptView = () => {
     return (
@@ -44,6 +49,19 @@ const ReciptView = () => {
             })}
           </ui>
         </div>
+        {location.pathname.includes("order") && (
+          <div className='set-order-done'>
+            <button
+              type='button'
+              onClick={async () => {
+                setOrderCompleted();
+                navigate(`/products`);
+              }}
+            >
+              Complete Order
+            </button>
+          </div>
+        )}
       </div>
     );
   };

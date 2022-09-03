@@ -4,6 +4,7 @@ const { PORT } = require("./services/serverConfigurations");
 const { router: productsRouter } = require("./routes/products");
 const { router: reciptsRouter } = require("./routes/recipts");
 const { router: customerRouter } = require("./routes/customer");
+const { router: inventoryRouter } = require("./routes/inventory");
 
 const app = express();
 
@@ -12,5 +13,6 @@ app.use(cors());
 app.use("/api/products", productsRouter);
 app.use("/api/recipts", reciptsRouter);
 app.use("/api/customers", customerRouter);
+app.use("/api/inventory", inventoryRouter);
 
 app.listen(PORT, () => console.log(`Server is listening to port ${PORT}...`));

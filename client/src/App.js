@@ -6,12 +6,13 @@ import {
   ReciptsPage,
   ProductsPage,
   ReciptView,
+  Inventory,
 } from "./services/componentsManager";
 
 const App = () => {
   return (
     <Router>
-      <div>
+      <>
         <Header />
         <Navbar />
         <main>
@@ -29,9 +30,10 @@ const App = () => {
                 <Route path=':id' element={<ReciptView />} />
               </Route>
             </Route>
+            <Route path='/inventory' element={<Inventory />} />
           </Routes>
         </main>
-      </div>
+      </>
     </Router>
   );
 };

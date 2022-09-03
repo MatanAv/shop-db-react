@@ -1,0 +1,14 @@
+.inventory-list > ul {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  width: 50%;
+  margin: auto;
+}
+
+.inventory-item {
+  margin: 1rem;
+}
+
+.inventory-item li {
+  margin: 0.25rem;
+}

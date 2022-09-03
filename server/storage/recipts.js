@@ -122,7 +122,7 @@ const getViewById = async (id, type) => {
 const setOrderDone = async (id) => {
   const isActive = await runSQL(
     `select is_active from headerorders
-  where order_id = :id;`,
+  where order_id = :id`,
     [id]
   );
 

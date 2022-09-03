@@ -22,6 +22,13 @@ const fetchAllRecipts = (type) => {
     .catch(alert);
 };
 
+const fetchInventoryList = () => {
+  return axios
+    .get(`api/inventory`)
+    .then((res) => res.data)
+    .catch(alert);
+};
+
 const getReciptDetails = (id, type) => {
   return axios
     .get(`api/recipts/${type}/${id}`)
@@ -50,12 +57,21 @@ const createNewOrder = (order) => {
     .catch(alert);
 };
 
+const setOrderDone = (id) => {
+  return axios
+    .put(`api/recipts/order/complete/${id}`)
+    .then((res) => res.data)
+    .catch(alert);
+};
+
 export {
   fetchAllProducts,
   fetchAllCustomers,
   fetchAllRecipts,
+  fetchInventoryList,
   getReciptDetails,
   getAllActiveOrders,
   getPrintedRecipt,
   createNewOrder,
+  setOrderDone,
 };

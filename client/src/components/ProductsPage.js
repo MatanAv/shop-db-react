@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { showLoading } from "../services/utils";
 import Product from "./Product";
+import { useNavigate } from "react-router-dom";
 import {
   fetchAllProducts,
   fetchAllCustomers,
@@ -13,10 +14,7 @@ const ProductsPage = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [customersList, setCustomersList] = useState([]);
   const [selectedCustomer, setSelectedCustomer] = useState({});
-
-  // {
-  //   console.log("here");
-  // }
+  let navigate = useNavigate();
 
   const getProducts = async () => {
     const response = await fetchAllProducts();
@@ -116,7 +114,7 @@ const ProductsPage = () => {
 
     const response = await createNewOrder(orderDetails);
 
-    console.log(response.data);
+    navigate("/");
   };
 
   return (

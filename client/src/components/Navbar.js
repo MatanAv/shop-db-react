@@ -16,7 +16,7 @@ const Navbar = () => {
             <Link to='/recipts/history'>Orders History</Link>
           </li>
           <li>
-            <Link to='/details'>Queries</Link>
+            <Link to='/inventory'>Inventory</Link>
           </li>
         </ul>
       </div>
