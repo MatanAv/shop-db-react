@@ -1,64 +1,64 @@
 import axios from "axios";
 axios.defaults.baseURL = `http://localhost:5000/`;
 
-const fetchAllProducts = async () => {
-  return await axios
+const fetchAllProducts = () => {
+  return axios
     .get(`api/products`)
     .then((res) => res.data)
     .catch(alert);
 };
 
-const fetchAllCustomers = async () => {
-  return await axios
+const fetchAllCustomers = () => {
+  return axios
     .get(`api/customers`)
     .then((res) => res.data)
     .catch(alert);
 };
 
-const fetchAllRecipts = async (type) => {
-  return await axios
+const fetchAllRecipts = (type) => {
+  return axios
     .get(`api/recipts/?type=${type}`)
     .then((res) => res.data)
     .catch(alert);
 };
 
-const fetchInventoryList = async () => {
-  return await axios
+const fetchInventoryList = () => {
+  return axios
     .get(`api/inventory`)
     .then((res) => res.data)
     .catch(alert);
 };
 
-const getReciptDetails = async (id, type) => {
-  return await axios
+const getReciptDetails = (id, type) => {
+  return axios
     .get(`api/recipts/${type}/${id}`)
     .then((res) => res.data)
     .catch(alert);
 };
 
-const getAllActiveOrders = async () => {
-  return await axios
+const getAllActiveOrders = () => {
+  return axios
     .get(`api/recipts/activeorders`)
     .then((res) => res.data)
     .catch(alert);
 };
 
-const getPrintedRecipt = async (id, type) => {
-  return await axios
+const getPrintedRecipt = (id, type) => {
+  return axios
     .get(`api/recipts/view/${type}/${id}`)
     .then((res) => res.data)
     .catch(alert);
 };
 
-const createNewOrder = async (order) => {
-  return await axios
+const createNewOrder = (order) => {
+  return axios
     .post(`api/recipts/order/post`, order)
     .then((res) => res.data)
     .catch(alert);
 };
 
-const setOrderDone = async (id) => {
-  return await axios
+const setOrderDone = (id) => {
+  return axios
     .put(`api/recipts/order/complete/${id}`)
     .then((res) => res.data)
     .catch(alert);
